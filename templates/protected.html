@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<section id="sensitive" class="myFooter">
+  <div class="inner">
+    <h2 class="major">Sensitive Information</h2>
+  </div>
+</section>
+{% endblock body %}
+{% block scripts %}
+<script src="{{ url_for("static", filename="js/protected.js") }}"></script>
+{% endblock scripts %}

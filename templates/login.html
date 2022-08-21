@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+<!-- Footer -->
+<section id="footer">
+  <div class="inner">
+    <h2 class="major">Login</h2>
+    <p>Login to use the application</p>
+    <form method="post" action="#" id="loginForm">
+      <div class="fields">
+        <div class="field">
+          <label for="name">Username</label>
+          <input type="text" name="name" id="username" />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" />
+        </div>
+      </div>
+      <ul class="actions">
+        <li><input type="submit" value="Login" /></li>
+      </ul>
+    </form>
+  </div>
+</section>
+{% endblock body %}
+{% block scripts %}
+<script src="{{ url_for("static", filename="js/login.js") }}"></script>
+{% endblock scripts %}
