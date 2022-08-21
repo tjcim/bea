@@ -80,10 +80,14 @@ class BurpExtender(IBurpExtender, ISessionHandlingAction):
                 + req[session_token_key_end:]
             )
         else:
-            request_string = self.helpers.bytesToString(req)
-            request_info = self.helpers.analyzeRequest(req)
-            body = request_string[request_info.getBodyOffset() :]  # noqa
-            headers = request_info.getHeaders()
-            headers.add(new_header)
-            message = self.helpers.buildHttpMessage(headers, body)
-            current_request.setRequest(message)
+            session_token_key_start = self.helpers.indexOf(
+                req, bytearray("User-Agent"), False, 0, len(req)
+            )
+            session_token_key_end = self.helpers.indexOf(
+                req, NEWLINE_BYTES, False, session_token_key_start, len(req)
+            )
+            current_request.setRequest(
+                req[0 : session_token_key_end + len(NEWLINE_BYTES)]  # noqa
+                + self.helpers.stringToBytes(new_header)
+                + req[session_token_key_end:]
+            )
